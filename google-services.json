@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "910888638188",
+    "project_id": "trykemoto",
+    "storage_bucket": "trykemoto.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910888638188:android:0cfc51c73afbb9372237c9",
+        "android_client_info": {
+          "package_name": "com.hailingTryke.trykeMoto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIOlE-W1L24nGt50PzczVnEKGLmrTP9SI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

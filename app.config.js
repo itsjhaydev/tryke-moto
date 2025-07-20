@@ -8,7 +8,7 @@ export default {
     scheme: "tryke-moto",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/icon.png",
+    icon: "./assets/images/icon.png",
     userInterfaceStyle: "light",
     splash: {
       image: "./assets/splash.png",

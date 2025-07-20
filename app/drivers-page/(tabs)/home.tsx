@@ -7,12 +7,15 @@ import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import SolidButton from "@/components/Buttons/SolidButton";
 import StatusSwitchButton from "@/components/Buttons/StatusSwitchButton";
 import DriverQueue from "@/components/DriverQueue";
+import PopupMessage from "@/components/Pop-up/popUpMessage";
 
 export default function Home() {
     const router = useRouter();
     const [location, setLocation] = React.useState<Location.LocationObject | null>(null);
     const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
     const mapRef = React.useRef<MapView>(null);
+
+    const [popupVisible, setPopupVisible] = React.useState(false);
 
     React.useEffect(() => {
         (async () => {
@@ -39,8 +42,31 @@ export default function Home() {
                 setErrorMsg('Error getting location');
                 console.error(error);
             }
+
+            // Simulate popup trigger after 3s
+            setTimeout(() => {
+                setPopupVisible(true);
+            }, 3000);
+
         })();
     }, []);
+
+
+    const handleAccept = () => {
+        console.log("✅ Ride Accepted");
+        setPopupVisible(false);
+    };
+
+    const handleCancel = () => {
+        console.log("❌ Ride Cancelled");
+        setPopupVisible(false);
+    };
+
+    const handleMessage = () => {
+        console.log("💬 Message tapped");
+        // router.push("/chat"); // optionally open chat
+    };
+
 
     return (
         <RN.View style={styles.container}>
@@ -85,6 +111,14 @@ export default function Home() {
                     queue={1}
                 />
             </RN.View>
+
+            {/* ✅ Popup modal */}
+            <PopupMessage
+                visible={popupVisible}
+                onAccept={handleAccept}
+                onCancel={handleCancel}
+                onMessage={handleMessage}
+            />
         </RN.View>
     );
 }

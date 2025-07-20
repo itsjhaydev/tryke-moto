@@ -15,6 +15,7 @@ import Toast from "react-native-toast-message";
 import OTPInput from "@/components/Inputs/OTPInputOutlined";
 import { encryptPassword } from "@/utils/encryptPassword";
 import { Ionicons } from "@expo/vector-icons";
+import { useAuth } from "@/context/AuthContext";
 
 export default function OtpVerificationScreen() {
   const router = useRouter();
@@ -26,6 +27,8 @@ export default function OtpVerificationScreen() {
   const [isResending, setIsResending] = useState(false);
 
   let phoneWithCode = `+63${params.phoneNumber}`;
+
+  const { login } = useAuth();
 
   useEffect(() => {
     sendVerificationCode();
@@ -69,25 +72,61 @@ export default function OtpVerificationScreen() {
       const uid = result.user.uid;
       const encryptedPassword = await encryptPassword(params.password as string);
 
-      await setDoc(doc(db, "users", uid), {
-        uid,
-        firstName: params.firstName,
-        lastName: params.lastName,
-        phoneNumber: phoneWithCode,
-        password: encryptedPassword,
-        role: params.role,
-        createdAt: new Date(),
-      });
-
-      Toast.show({
-        type: "success",
-        text1: "Welcome!",
-        text2: "You're successfully registered.",
-      });
 
       if (params.role === "driver") {
-        router.replace("/auth/register-toda");
+
+        await setDoc(doc(db, "users", uid), {
+          uid,
+          firstName: params.firstName,
+          lastName: params.lastName,
+          phoneNumber: phoneWithCode,
+          password: encryptedPassword,
+          role: params.role, // should be "driver"
+          todaName: "",
+          todaNumber: "",
+          registrationNumber: "",
+          stickerImageUrl: "",
+          licenseFrontUrl: "",
+          licenseBackUrl: "",
+          orImageUrl: "",
+          crImageUrl: "",
+          tricycleFrontUrl: "",
+          tricycleBackUrl: "",
+          tricycleSideUrl: "",
+          tricycleInteriorUrl: "",
+          createdAt: new Date(),
+        });
+
+
+        // Save local login context state
+        login({
+          uid,
+          firstName: params.firstName,
+          lastName: params.lastName,
+          phoneNumber: phoneWithCode,
+          role: "driver",
+        });
+
+
+        router.replace("/drivers-page/(tabs)");
       } else {
+
+        Toast.show({
+          type: "success",
+          text1: "Welcome!",
+          text2: "You're successfully registered.",
+        });
+
+        await setDoc(doc(db, "users", uid), {
+          uid,
+          firstName: params.firstName,
+          lastName: params.lastName,
+          phoneNumber: phoneWithCode,
+          password: encryptedPassword,
+          role: params.role,
+          createdAt: new Date(),
+        });
+
         router.replace("/homepage/(tabs)");
       }
     } catch (error: any) {
@@ -104,7 +143,7 @@ export default function OtpVerificationScreen() {
 
   return (
     <View style={styles.container}>
-       <FirebaseRecaptchaVerifierModal
+      <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifier}
         firebaseConfig={firebaseConfig}
       />
@@ -218,7 +257,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Poppins-Regular",
     fontSize: 13,
-    marginTop: 12,
+    marginTop: 100,
     color: "#4B5563",
     textAlignVertical: "center",
     textAlign: "center",

@@ -12,7 +12,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDEslMXmqQcd6oy-vUNjDUSYQsT_KVQWf4",
   authDomain: "trykemoto.firebaseapp.com",
   projectId: "trykemoto",
-  storageBucket: "trykemoto.appspot.com",
+  storageBucket: "trykemoto.appspot.app",
   messagingSenderId: "910888638188",
   appId: "1:910888638188:web:cd23d3ce6a391c612237c9",
   measurementId: "G-XDPPXJ9266"

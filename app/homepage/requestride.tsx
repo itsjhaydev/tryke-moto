@@ -3,18 +3,16 @@ import * as RN from "react-native";
 import CustomView from "@/components/CustomView";
 import SolidButton from "@/components/Buttons/SolidButton";
 import OutlinedButton from "@/components/Buttons/OutlinedButton";
-import DropDown from "@/components/DropDown";
 import { useRouter } from 'expo-router';
 
 export default function RequestRide() {
-    const [selectedTODA, setSelectedTODA] = React.useState<string | null>(null);
     const router = useRouter();
 
     return (
         <CustomView>
             {/* TODA Dropdown */}
             <RN.View style={{  marginTop: 25, gap: 10 }}>
-                <SolidButton title="PICK UP LOCATION" onPress={() => console.log("Request Ride")} />
+                <SolidButton title="PICK UP LOCATION" onPress={() => router.push('/homepage/pickupDropoff')} />
                 <SolidButton title="DROP OFF LOCATION" onPress={() => console.log("Request Ride")} />
             </RN.View>
             {/* Fare Breakdown */}
@@ -26,17 +24,17 @@ export default function RequestRide() {
                 </RN.View>
                 <RN.View style={styles.fareRow}>
                     <RN.Text style={styles.fareLabel}>Booking Fee:</RN.Text>
-                    <RN.Text style={styles.fareAmount}>₱00.00</RN.Text>
+                    <RN.Text style={styles.fareAmount}>₱15.00</RN.Text>
                 </RN.View>
                 <RN.View style={styles.fareTotalRow}>
                     <RN.Text style={styles.fareTotalLabel}>Total:</RN.Text>
-                    <RN.Text style={styles.fareTotalAmount}>₱00.00</RN.Text>
+                    <RN.Text style={styles.fareTotalAmount}>₱15.00</RN.Text>
                 </RN.View>
             </RN.View>
 
             {/* Buttons */}
             <RN.View style={styles.buttonContainer}>
-                <SolidButton title="Choose Payment Method" onPress={() => console.log("Request Ride")} />
+                <SolidButton title="Choose Payment Method" onPress={() => router.push('/homepage/select-payment')} />
                 <OutlinedButton title="Cancel" onPress={() => router.push('../homepage/(tabs)')} />
             </RN.View>
         </CustomView>

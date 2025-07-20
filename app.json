@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "tryke-moto",
+    "slug": "tryke-moto",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#337b09",
+        "permissions": ["ACCESS_FINE_LOCATION"]
+      },
+      "package": "com.lesterleal.trykemoto"
+    },
+    "permissions": [
+      "LOCATION"
+    ],
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      ["@expo/webpack-config", "expo-location", "react-native-maps"],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#337b09"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d766f3c9-04d1-449d-845c-3c15e414764d"
+      }
+    }
+  }
+}
